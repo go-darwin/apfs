@@ -275,3 +275,17 @@ func CopyFileStateGet(state COPYFILE_STATE, flag COPYFILE_STATE_FLAG, result *in
 
 	return nil
 }
+
+// CopyFileStateSet functions can be used to manipulate the COPYFILE_STATE object returned by CopyFileStateAlloc.
+//
+// The dst parameter's type depends on the flag parameter that is passed in.
+//
+//  int
+//  copyfile_state_set(copyfile_state_t state, uint32_t flag, const void * src);
+func CopyFileStateSet(state COPYFILE_STATE, flag COPYFILE_STATE_FLAG, result *int) error {
+	if err := C.copyfile_state_set(state, C.uint32_t(flag), unsafe.Pointer(result)); err != 0 {
+		return syscall.Errno(err)
+	}
+
+	return nil
+}
