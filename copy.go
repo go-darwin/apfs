@@ -49,19 +49,19 @@ var (
 	COPYFILE_VERBOSE COPYFILE_FLAG = 1 << 30
 )
 
-type COPYFILE_STATE uint32
+type COPYFILE_STATE_FLAG uint32
 
 var (
-	COPYFILE_STATE_SRC_FD       COPYFILE_STATE = C.COPYFILE_STATE_SRC_FD
-	COPYFILE_STATE_DST_FD       COPYFILE_STATE = C.COPYFILE_STATE_DST_FD
-	COPYFILE_STATE_SRC_FILENAME COPYFILE_STATE = C.COPYFILE_STATE_SRC_FILENAME
-	COPYFILE_STATE_DST_FILENAME COPYFILE_STATE = C.COPYFILE_STATE_DST_FILENAME
-	COPYFILE_STATE_STATUS_CB    COPYFILE_STATE = C.COPYFILE_STATE_STATUS_CB
-	COPYFILE_STATE_STATUS_CTX   COPYFILE_STATE = C.COPYFILE_STATE_STATUS_CTX
-	COPYFILE_STATE_QUARANTINE   COPYFILE_STATE = C.COPYFILE_STATE_QUARANTINE
-	COPYFILE_STATE_COPIED       COPYFILE_STATE = C.COPYFILE_STATE_COPIED
-	COPYFILE_STATE_XATTRNAME    COPYFILE_STATE = C.COPYFILE_STATE_XATTRNAME
-	COPYFILE_STATE_WAS_CLONED   COPYFILE_STATE = C.COPYFILE_STATE_WAS_CLONED
+	COPYFILE_STATE_SRC_FD       COPYFILE_STATE_FLAG = C.COPYFILE_STATE_SRC_FD
+	COPYFILE_STATE_DST_FD       COPYFILE_STATE_FLAG = C.COPYFILE_STATE_DST_FD
+	COPYFILE_STATE_SRC_FILENAME COPYFILE_STATE_FLAG = C.COPYFILE_STATE_SRC_FILENAME
+	COPYFILE_STATE_DST_FILENAME COPYFILE_STATE_FLAG = C.COPYFILE_STATE_DST_FILENAME
+	COPYFILE_STATE_STATUS_CB    COPYFILE_STATE_FLAG = C.COPYFILE_STATE_STATUS_CB
+	COPYFILE_STATE_STATUS_CTX   COPYFILE_STATE_FLAG = C.COPYFILE_STATE_STATUS_CTX
+	COPYFILE_STATE_QUARANTINE   COPYFILE_STATE_FLAG = C.COPYFILE_STATE_QUARANTINE
+	COPYFILE_STATE_COPIED       COPYFILE_STATE_FLAG = C.COPYFILE_STATE_COPIED
+	COPYFILE_STATE_XATTRNAME    COPYFILE_STATE_FLAG = C.COPYFILE_STATE_XATTRNAME
+	COPYFILE_STATE_WAS_CLONED   COPYFILE_STATE_FLAG = C.COPYFILE_STATE_WAS_CLONED
 )
 
 type COPYFILE_RECURSE_CALLBACK uint32
@@ -88,9 +88,9 @@ var (
 	COPYFILE_QUIT     COPYFILE_RECURSE_CALLBACK = C.COPYFILE_QUIT     // 2
 )
 
-type state C.copyfile_state_t
+type COPYFILE_STATE C.copyfile_state_t
 
-func CopyFile(src, dst string, state state, flag COPYFILE_FLAG) (bool, error) {
+func CopyFile(src, dst string, state COPYFILE_STATE, flag COPYFILE_FLAG) (bool, error) {
 	if err := C.copyfile(C.CString(src), C.CString(dst), state, C.copyfile_flags_t(flag)); err != 0 {
 		return false, fmt.Errorf("couldn't copy from %s to %s: %v", src, dst, syscall.Errno(err))
 	}
@@ -103,7 +103,7 @@ func CopyFile(src, dst string, state state, flag COPYFILE_FLAG) (bool, error) {
 	return isCloned != 0, nil
 }
 
-func FcopyFile(src, dst uintptr, state state, flag COPYFILE_FLAG) error {
+func FcopyFile(src, dst uintptr, state COPYFILE_STATE, flag COPYFILE_FLAG) error {
 	if err := C.fcopyfile(C.int(src), C.int(dst), state, C.copyfile_flags_t(flag)); err != 0 {
 		return fmt.Errorf("couldn't fcopy from %d to %d: %v", src, dst, syscall.Errno(err))
 	}
@@ -111,11 +111,11 @@ func FcopyFile(src, dst uintptr, state state, flag COPYFILE_FLAG) error {
 	return nil
 }
 
-func CopyFileStateAlloc() state {
-	return state(C.copyfile_state_alloc())
+func CopyFileStateAlloc() COPYFILE_STATE {
+	return COPYFILE_STATE(C.copyfile_state_alloc())
 }
 
-func CopyFileStateFree(state state) error {
+func CopyFileStateFree(state COPYFILE_STATE) error {
 	if err := C.copyfile_state_free(C.copyfile_state_t(state)); err != 0 {
 		return syscall.Errno(err)
 	}
@@ -123,7 +123,7 @@ func CopyFileStateFree(state state) error {
 	return nil
 }
 
-func CopyFileStateGet(state state, flag COPYFILE_STATE, result *int) error {
+func CopyFileStateGet(state COPYFILE_STATE, flag COPYFILE_STATE_FLAG, result *int) error {
 	if err := C.copyfile_state_get(state, C.uint32_t(flag), unsafe.Pointer(result)); err != 0 {
 		return syscall.Errno(err)
 	}

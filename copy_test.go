@@ -16,7 +16,7 @@ func TestCopyFile(t *testing.T) {
 	type args struct {
 		src   string
 		dst   string
-		state state
+		state COPYFILE_STATE
 		flag  COPYFILE_FLAG
 	}
 	tests := []struct {
@@ -68,7 +68,7 @@ func TestFcopyFile(t *testing.T) {
 	type args struct {
 		src   uintptr
 		dst   uintptr
-		state state
+		state COPYFILE_STATE
 		flag  COPYFILE_FLAG
 	}
 	tests := []struct {
@@ -129,7 +129,7 @@ func TestCopyFileStateAlloc(t *testing.T) {}
 
 func TestCopyFileStateFree(t *testing.T) {
 	type args struct {
-		state state
+		state COPYFILE_STATE
 	}
 	tests := []struct {
 		name    string
