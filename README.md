@@ -26,7 +26,224 @@ go get -u -v github.com/zchee/go-apfs
 
 ## API
 
-See [godoc.org/github.com/zchee/go-apfs](https://godoc.org/github.com/zchee/go-apfs).
+`import "github.com/zchee/go-apfs"`
+
+* [Overview](#pkg-overview)
+* [Index](#pkg-index)
+* [Examples](#pkg-examples)
+* [Subdirectories](#pkg-subdirectories)
+
+## <a name="pkg-overview">Overview</a>
+Package apfs implements an Apple File System(apfs) bindings for Go.
+
+## <a name="pkg-index">Index</a>
+* [func CloneFile(src, dst string, flag CLONEFILE_FALG) error](#CloneFile)
+* [func CloneFileAt(src, dst string, flag CLONEFILE_FALG) error](#CloneFileAt)
+* [func CopyFile(src, dst string, state state, flags COPYFILE_FLAG) (bool, error)](#CopyFile)
+* [func CopyFileStateAlloc() state](#CopyFileStateAlloc)
+* [func CopyFileStateFree(state state) error](#CopyFileStateFree)
+* [func CopyFileStateGet(state state, flag COPYFILE_STATE, result *int) error](#CopyFileStateGet)
+* [func FcloneFileAt(srcFd uintptr, dst string, flag CLONEFILE_FALG) error](#FcloneFileAt)
+* [func FcopyFile(src, dst uintptr, state state, flags COPYFILE_FLAG) error](#FcopyFile)
+* [func RenameatxNp(src, dst string, flags RENAME_FALG) error](#RenameatxNp)
+* [func RenamexNp(src, dst string, flags RENAME_FALG) error](#RenamexNp)
+* [type CLONEFILE_FALG](#CLONEFILE_FALG)
+* [type COPYFILE_FLAG](#COPYFILE_FLAG)
+* [type COPYFILE_RECURSE_CALLBACK](#COPYFILE_RECURSE_CALLBACK)
+* [type COPYFILE_STATE](#COPYFILE_STATE)
+* [type RENAME_FALG](#RENAME_FALG)
+
+#### <a name="pkg-examples">Examples</a>
+* [CloneFileAt](#example_CloneFileAt)
+* [CopyFile](#example_CopyFile)
+* [CopyFileStateAlloc](#example_CopyFileStateAlloc)
+* [CopyFileStateFree](#example_CopyFileStateFree)
+* [CopyFileStateGet](#example_CopyFileStateGet)
+* [FcloneFileAt](#example_FcloneFileAt)
+* [FcopyFile](#example_FcopyFile)
+
+#### <a name="pkg-files">Package files</a>
+[apfs.go](/src/github.com/zchee/go-apfs/apfs.go) [clone.go](/src/github.com/zchee/go-apfs/clone.go) [copy.go](/src/github.com/zchee/go-apfs/copy.go) [rename.go](/src/github.com/zchee/go-apfs/rename.go) 
+
+
+## <a name="CloneFile">func</a> [CloneFile](/src/target/clone.go?s=472:530#L19)
+
+``` go
+func CloneFile(src, dst string, flag CLONEFILE_FALG) error
+```
+
+## <a name="CloneFileAt">func</a> [CloneFileAt](/src/target/clone.go?s=716:776#L27)
+
+``` go
+func CloneFileAt(src, dst string, flag CLONEFILE_FALG) error
+```
+
+## <a name="CopyFile">func</a> [CopyFile](/src/target/copy.go?s=3528:3606#L83)
+
+``` go
+func CopyFile(src, dst string, state state, flags COPYFILE_FLAG) (bool, error)
+```
+
+## <a name="CopyFileStateAlloc">func</a> [CopyFileStateAlloc](/src/target/copy.go?s=4288:4319#L104)
+
+``` go
+func CopyFileStateAlloc() state
+```
+
+## <a name="CopyFileStateFree">func</a> [CopyFileStateFree](/src/target/copy.go?s=4365:4406#L108)
+
+``` go
+func CopyFileStateFree(state state) error
+```
+
+## <a name="CopyFileStateGet">func</a> [CopyFileStateGet](/src/target/copy.go?s=4528:4602#L116)
+
+``` go
+func CopyFileStateGet(state state, flag COPYFILE_STATE, result *int) error
+```
+
+## <a name="FcloneFileAt">func</a> [FcloneFileAt](/src/target/clone.go?s=1134:1205#L43)
+
+``` go
+func FcloneFileAt(srcFd uintptr, dst string, flag CLONEFILE_FALG) error
+```
+
+## <a name="FcopyFile">func</a> [FcopyFile](/src/target/copy.go?s=4015:4087#L96)
+
+``` go
+func FcopyFile(src, dst uintptr, state state, flags COPYFILE_FLAG) error
+```
+
+## <a name="RenameatxNp">func</a> [RenameatxNp](/src/target/rename.go?s=704:762#L26)
+
+``` go
+func RenameatxNp(src, dst string, flags RENAME_FALG) error
+```
+
+## <a name="RenamexNp">func</a> [RenamexNp](/src/target/rename.go?s=470:526#L18)
+
+``` go
+func RenamexNp(src, dst string, flags RENAME_FALG) error
+```
+
+## <a name="CLONEFILE_FALG">type</a> [CLONEFILE_FALG](/src/target/clone.go?s=391:421#L13)
+
+``` go
+type CLONEFILE_FALG C.uint32_t
+```
+
+``` go
+var (
+    CLONE_NOFOLLOW CLONEFILE_FALG = 0x0001
+)
+```
+
+## <a name="COPYFILE_FLAG">type</a> [COPYFILE_FLAG](/src/target/copy.go?s=296:318#L10)
+
+``` go
+type COPYFILE_FLAG int
+```
+
+``` go
+var (
+    COPYFILE_ACL   COPYFILE_FLAG = 1 << 0
+    COPYFILE_STAT  COPYFILE_FLAG = 1 << 1
+    COPYFILE_XATTR COPYFILE_FLAG = 1 << 2
+    COPYFILE_DATA  COPYFILE_FLAG = 1 << 3
+
+    COPYFILE_SECURITY COPYFILE_FLAG = COPYFILE_STAT | COPYFILE_ACL
+    COPYFILE_METADATA COPYFILE_FLAG = COPYFILE_SECURITY | COPYFILE_XATTR
+    COPYFILE_ALL      COPYFILE_FLAG = COPYFILE_METADATA | COPYFILE_DATA
+
+    COPYFILE_RECURSIVE    COPYFILE_FLAG = 1 << 15 // Descend into hierarchies
+    COPYFILE_CHECK        COPYFILE_FLAG = 1 << 16 // return flags for xattr or acls if set
+    COPYFILE_EXCL         COPYFILE_FLAG = 1 << 17 // fail if destination exists
+    COPYFILE_NOFOLLOW_SRC COPYFILE_FLAG = 1 << 18 // don't follow if source is a symlink
+    COPYFILE_NOFOLLOW_DST COPYFILE_FLAG = 1 << 19 // don't follow if dst is a symlink
+    COPYFILE_MOVE         COPYFILE_FLAG = 1 << 20 // unlink src after copy
+    COPYFILE_UNLINK       COPYFILE_FLAG = 1 << 21 // unlink dst before copy
+    COPYFILE_NOFOLLOW     COPYFILE_FLAG = COPYFILE_NOFOLLOW_SRC | COPYFILE_NOFOLLOW_DST
+
+    COPYFILE_PACK   COPYFILE_FLAG = 1 << 22
+    COPYFILE_UNPACK COPYFILE_FLAG = 1 << 23
+
+    COPYFILE_CLONE       COPYFILE_FLAG = 1 << 24
+    COPYFILE_CLONE_FORCE COPYFILE_FLAG = 1 << 25
+
+    COPYFILE_RUN_IN_PLACE COPYFILE_FLAG = 1 << 26
+
+    COPYFILE_VERBOSE COPYFILE_FLAG = 1 << 30
+)
+```
+
+## <a name="COPYFILE_RECURSE_CALLBACK">type</a> [COPYFILE_RECURSE_CALLBACK](/src/target/copy.go?s=2363:2400#L57)
+
+``` go
+type COPYFILE_RECURSE_CALLBACK uint32
+```
+
+``` go
+var (
+    COPYFILE_RECURSE_ERROR       COPYFILE_RECURSE_CALLBACK = C.COPYFILE_RECURSE_ERROR       // 0
+    COPYFILE_RECURSE_FILE        COPYFILE_RECURSE_CALLBACK = C.COPYFILE_RECURSE_FILE        // 1
+    COPYFILE_RECURSE_DIR         COPYFILE_RECURSE_CALLBACK = C.COPYFILE_RECURSE_DIR         // 2
+    COPYFILE_RECURSE_DIR_CLEANUP COPYFILE_RECURSE_CALLBACK = C.COPYFILE_RECURSE_DIR_CLEANUP // 3
+    COPYFILE_COPY_DATA           COPYFILE_RECURSE_CALLBACK = C.COPYFILE_COPY_DATA           // 4
+    COPYFILE_COPY_XATTR          COPYFILE_RECURSE_CALLBACK = C.COPYFILE_COPY_XATTR          // 5
+)
+```
+
+``` go
+var (
+    COPYFILE_START    COPYFILE_RECURSE_CALLBACK = C.COPYFILE_START    // 1
+    COPYFILE_FINISH   COPYFILE_RECURSE_CALLBACK = C.COPYFILE_FINISH   // 2
+    COPYFILE_ERR      COPYFILE_RECURSE_CALLBACK = C.COPYFILE_ERR      // 3
+    COPYFILE_PROGRESS COPYFILE_RECURSE_CALLBACK = C.COPYFILE_PROGRESS // 4
+)
+```
+
+``` go
+var (
+    COPYFILE_CONTINUE COPYFILE_RECURSE_CALLBACK = C.COPYFILE_CONTINUE // 0
+    COPYFILE_SKIP     COPYFILE_RECURSE_CALLBACK = C.COPYFILE_SKIP     // 1
+    COPYFILE_QUIT     COPYFILE_RECURSE_CALLBACK = C.COPYFILE_QUIT     // 2
+)
+```
+
+## <a name="COPYFILE_STATE">type</a> [COPYFILE_STATE](/src/target/copy.go?s=1596:1622#L42)
+
+``` go
+type COPYFILE_STATE uint32
+```
+
+``` go
+var (
+    COPYFILE_STATE_SRC_FD       COPYFILE_STATE = C.COPYFILE_STATE_SRC_FD
+    COPYFILE_STATE_DST_FD       COPYFILE_STATE = C.COPYFILE_STATE_DST_FD
+    COPYFILE_STATE_SRC_FILENAME COPYFILE_STATE = C.COPYFILE_STATE_SRC_FILENAME
+    COPYFILE_STATE_DST_FILENAME COPYFILE_STATE = C.COPYFILE_STATE_DST_FILENAME
+    COPYFILE_STATE_STATUS_CB    COPYFILE_STATE = C.COPYFILE_STATE_STATUS_CB
+    COPYFILE_STATE_STATUS_CTX   COPYFILE_STATE = C.COPYFILE_STATE_STATUS_CTX
+    COPYFILE_STATE_QUARANTINE   COPYFILE_STATE = C.COPYFILE_STATE_QUARANTINE
+    COPYFILE_STATE_COPIED       COPYFILE_STATE = C.COPYFILE_STATE_COPIED
+    COPYFILE_STATE_XATTRNAME    COPYFILE_STATE = C.COPYFILE_STATE_XATTRNAME
+    COPYFILE_STATE_WAS_CLONED   COPYFILE_STATE = C.COPYFILE_STATE_WAS_CLONED
+)
+```
+
+## <a name="RENAME_FALG">type</a> [RENAME_FALG](/src/target/rename.go?s=315:336#L10)
+
+``` go
+type RENAME_FALG uint
+```
+
+``` go
+var (
+    RENAME_SECLUDE RENAME_FALG = 0x00000001
+    RENAME_SWAP    RENAME_FALG = 0x00000002
+    RENAME_EXCL    RENAME_FALG = 0x00000004
+)
+```
 
 
 ## Contribute
