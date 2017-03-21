@@ -7,7 +7,7 @@
 package apfs
 
 /*
-#include <fcntl.h> // for AT_FDCWD
+#include <fcntl.h>  // for AT_FDCWD
 #include <stdint.h> // for uint32_t
 #include <sys/attr.h>
 #include <sys/clonefile.h>
@@ -20,7 +20,7 @@ import (
 	"syscall"
 )
 
-type CLONEFILE_FALG C.uint32_t
+type CLONEFILE_FALG uint32
 
 var (
 	CLONE_NOFOLLOW CLONEFILE_FALG = 0x0001
