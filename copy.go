@@ -105,7 +105,7 @@ func CopyFile(src, dst string, state state, flags COPYFILE_FLAG) (bool, error) {
 
 func FcopyFile(src, dst uintptr, state state, flags COPYFILE_FLAG) error {
 	if err := C.fcopyfile(C.int(src), C.int(dst), state, C.copyfile_flags_t(flags)); err != 0 {
-		return fmt.Errorf("couldn't fcopy from %s to %s: %v", src, dst, syscall.Errno(err))
+		return fmt.Errorf("couldn't fcopy from %d to %d: %v", src, dst, syscall.Errno(err))
 	}
 
 	return nil
