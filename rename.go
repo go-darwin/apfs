@@ -17,14 +17,25 @@ import (
 	"syscall"
 )
 
+// RENAME_FALG provides the rename flag.
 type RENAME_FALG uint
 
 var (
-	RENAME_SECLUDE RENAME_FALG = 0x00000001
-	RENAME_SWAP    RENAME_FALG = 0x00000002
-	RENAME_EXCL    RENAME_FALG = 0x00000004
+	// RENAME_SWAP on file systems that support it (see getattrlist(2) VOL_CAP_INT_RENAME_SWAP), it will cause the source and target to be atomically swapped.
+	//
+	// Source and target need not be of the same type, i.e. it is possible to swap a file with a directory.
+	//
+	// EINVAL is returned in case of bitwise-inclusive OR with RENAME_EXCL.
+	RENAME_SWAP RENAME_FALG = 0x00000002
+	// RENAME_EXCL on file systems that support it (see getattrlist(2) VOL_CAP_INT_RENAME_EXCL), it will cause EEXIST to be returned if the destination already exists.
+	//
+	// EINVAL is returned in case of bitwise-inclusive OR with RENAME_SWAP.
+	RENAME_EXCL RENAME_FALG = 0x00000004
 )
 
+// RenamexNp system calls are similar to rename() and renameat() counterparts except that they take a flags argument.
+//  int
+//  renamex_np(const char *from, const char *to, unsigned int flags);
 func RenamexNp(src, dst string, flags RENAME_FALG) error {
 	if err := C.renamex_np(C.CString(src), C.CString(dst), C.unsigned(flags)); err != 0 {
 		return fmt.Errorf("error: C.renamex_np: %v", (syscall.Errno(err)))
@@ -33,6 +44,9 @@ func RenamexNp(src, dst string, flags RENAME_FALG) error {
 	return nil
 }
 
+// RenamexNp system calls are similar to rename() and renameat() counterparts except that they take a flags argument.
+//  int
+//  renameatx_np(int fromfd, const char *from, int tofd, const char *to, unsigned int flags);
 func RenameatxNp(src, dst string, flags RENAME_FALG) error {
 	var srcFd C.int
 	if !filepath.IsAbs(src) {
