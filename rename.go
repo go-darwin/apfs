@@ -36,8 +36,8 @@ var (
 // RenamexNp system calls are similar to rename() and renameat() counterparts except that they take a flags argument.
 //  int
 //  renamex_np(const char *from, const char *to, unsigned int flags);
-func RenamexNp(src, dst string, flags RENAME_FALG) error {
-	if err := C.renamex_np(C.CString(src), C.CString(dst), C.unsigned(flags)); err != 0 {
+func RenamexNp(src, dst string, flag RENAME_FALG) error {
+	if err := C.renamex_np(C.CString(src), C.CString(dst), C.unsigned(flag)); err != 0 {
 		return fmt.Errorf("error: C.renamex_np: %v", (syscall.Errno(err)))
 	}
 
@@ -47,7 +47,7 @@ func RenamexNp(src, dst string, flags RENAME_FALG) error {
 // RenamexNp system calls are similar to rename() and renameat() counterparts except that they take a flags argument.
 //  int
 //  renameatx_np(int fromfd, const char *from, int tofd, const char *to, unsigned int flags);
-func RenameatxNp(src, dst string, flags RENAME_FALG) error {
+func RenameatxNp(src, dst string, flag RENAME_FALG) error {
 	var srcFd C.int
 	if !filepath.IsAbs(src) {
 		srcFd = C.AT_FDCWD
@@ -56,7 +56,7 @@ func RenameatxNp(src, dst string, flags RENAME_FALG) error {
 	if !filepath.IsAbs(dst) {
 		dstFd = C.AT_FDCWD
 	}
-	if err := C.renameatx_np(srcFd, C.CString(src), dstFd, C.CString(dst), C.unsigned(flags)); err != 0 {
+	if err := C.renameatx_np(srcFd, C.CString(src), dstFd, C.CString(dst), C.unsigned(flag)); err != 0 {
 		return fmt.Errorf("error: C.renameatx_np: %v", syscall.Errno(err))
 	}
 
