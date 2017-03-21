@@ -37,17 +37,17 @@ go get -u -v github.com/zchee/go-apfs
 Package apfs implements an Apple File System(apfs) bindings for Go.
 
 ## <a name="pkg-index">Index</a>
-* [func CloneFile(src, dst string, flag CLONEFILE_FALG) error](#CloneFile)
-* [func CloneFileAt(src, dst string, flag CLONEFILE_FALG) error](#CloneFileAt)
+* [func CloneFile(src, dst string, flag CLONEFILE_FLAG) error](#CloneFile)
+* [func CloneFileAt(src, dst string, flag CLONEFILE_FLAG) error](#CloneFileAt)
 * [func CopyFile(src, dst string, state state, flags COPYFILE_FLAG) (bool, error)](#CopyFile)
 * [func CopyFileStateAlloc() state](#CopyFileStateAlloc)
 * [func CopyFileStateFree(state state) error](#CopyFileStateFree)
 * [func CopyFileStateGet(state state, flag COPYFILE_STATE, result *int) error](#CopyFileStateGet)
-* [func FcloneFileAt(srcFd uintptr, dst string, flag CLONEFILE_FALG) error](#FcloneFileAt)
+* [func FcloneFileAt(srcFd uintptr, dst string, flag CLONEFILE_FLAG) error](#FcloneFileAt)
 * [func FcopyFile(src, dst uintptr, state state, flags COPYFILE_FLAG) error](#FcopyFile)
 * [func RenameatxNp(src, dst string, flags RENAME_FALG) error](#RenameatxNp)
 * [func RenamexNp(src, dst string, flags RENAME_FALG) error](#RenamexNp)
-* [type CLONEFILE_FALG](#CLONEFILE_FALG)
+* [type CLONEFILE_FLAG](#CLONEFILE_FLAG)
 * [type COPYFILE_FLAG](#COPYFILE_FLAG)
 * [type COPYFILE_RECURSE_CALLBACK](#COPYFILE_RECURSE_CALLBACK)
 * [type COPYFILE_STATE](#COPYFILE_STATE)
@@ -69,13 +69,13 @@ Package apfs implements an Apple File System(apfs) bindings for Go.
 ## <a name="CloneFile">func</a> [CloneFile](/src/target/clone.go?s=472:530#L19)
 
 ``` go
-func CloneFile(src, dst string, flag CLONEFILE_FALG) error
+func CloneFile(src, dst string, flag CLONEFILE_FLAG) error
 ```
 
 ## <a name="CloneFileAt">func</a> [CloneFileAt](/src/target/clone.go?s=716:776#L27)
 
 ``` go
-func CloneFileAt(src, dst string, flag CLONEFILE_FALG) error
+func CloneFileAt(src, dst string, flag CLONEFILE_FLAG) error
 ```
 
 ## <a name="CopyFile">func</a> [CopyFile](/src/target/copy.go?s=3528:3606#L83)
@@ -105,7 +105,7 @@ func CopyFileStateGet(state state, flag COPYFILE_STATE, result *int) error
 ## <a name="FcloneFileAt">func</a> [FcloneFileAt](/src/target/clone.go?s=1134:1205#L43)
 
 ``` go
-func FcloneFileAt(srcFd uintptr, dst string, flag CLONEFILE_FALG) error
+func FcloneFileAt(srcFd uintptr, dst string, flag CLONEFILE_FLAG) error
 ```
 
 ## <a name="FcopyFile">func</a> [FcopyFile](/src/target/copy.go?s=4015:4087#L96)
@@ -126,15 +126,15 @@ func RenameatxNp(src, dst string, flags RENAME_FALG) error
 func RenamexNp(src, dst string, flags RENAME_FALG) error
 ```
 
-## <a name="CLONEFILE_FALG">type</a> [CLONEFILE_FALG](/src/target/clone.go?s=391:421#L13)
+## <a name="CLONEFILE_FLAG">type</a> [CLONEFILE_FLAG](/src/target/clone.go?s=391:421#L13)
 
 ``` go
-type CLONEFILE_FALG C.uint32_t
+type CLONEFILE_FLAG C.uint32_t
 ```
 
 ``` go
 var (
-    CLONE_NOFOLLOW CLONEFILE_FALG = 0x0001
+    CLONE_NOFOLLOW CLONEFILE_FLAG = 0x0001
 )
 ```
 

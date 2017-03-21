@@ -16,7 +16,7 @@ func TestCloneFile(t *testing.T) {
 	type args struct {
 		src  string
 		dst  string
-		flag CLONEFILE_FALG
+		flag CLONEFILE_FLAG
 	}
 	tests := []struct {
 		name    string
@@ -28,7 +28,7 @@ func TestCloneFile(t *testing.T) {
 			args: args{
 				src:  testFile,
 				dst:  filepath.Join(mountPoint, "clonefile.txt"),
-				flag: CLONEFILE_FALG(0),
+				flag: CLONEFILE_FLAG(0),
 			},
 			wantErr: false,
 		},
@@ -48,7 +48,7 @@ func TestCloneFileAt(t *testing.T) {
 	type args struct {
 		src  string
 		dst  string
-		flag CLONEFILE_FALG
+		flag CLONEFILE_FLAG
 	}
 	tests := []struct {
 		name    string
@@ -60,7 +60,7 @@ func TestCloneFileAt(t *testing.T) {
 			args: args{
 				src:  testFile,
 				dst:  filepath.Join(mountPoint, "clonefileat.txt"),
-				flag: CLONEFILE_FALG(0),
+				flag: CLONEFILE_FLAG(0),
 			},
 			wantErr: false,
 		},
@@ -78,7 +78,7 @@ func TestFcloneFileAt(t *testing.T) {
 	type args struct {
 		srcFd uintptr
 		dst   string
-		flag  CLONEFILE_FALG
+		flag  CLONEFILE_FLAG
 	}
 	tests := []struct {
 		name    string
@@ -90,7 +90,7 @@ func TestFcloneFileAt(t *testing.T) {
 			name: "simple",
 			args: args{
 				dst:  filepath.Join(mountPoint, "fclonefileat.txt"),
-				flag: CLONEFILE_FALG(0),
+				flag: CLONEFILE_FLAG(0),
 			},
 			file:    testFile,
 			wantErr: false,

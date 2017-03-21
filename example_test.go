@@ -38,7 +38,7 @@ func ExampleCopyFileStateGet()   {}
 
 func ExampleCloneFile() {
 	src, dst := os.Args[1], os.Args[2]
-	err := CloneFile(src, dst, CLONEFILE_FALG(0))
+	err := CloneFile(src, dst, CLONEFILE_FLAG(0))
 	if err != nil {
 		log.Fatal(err)
 	}
