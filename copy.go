@@ -90,8 +90,8 @@ var (
 
 type state C.copyfile_state_t
 
-func CopyFile(src, dst string, state state, flags COPYFILE_FLAG) (bool, error) {
-	if err := C.copyfile(C.CString(src), C.CString(dst), state, C.copyfile_flags_t(flags)); err != 0 {
+func CopyFile(src, dst string, state state, flag COPYFILE_FLAG) (bool, error) {
+	if err := C.copyfile(C.CString(src), C.CString(dst), state, C.copyfile_flags_t(flag)); err != 0 {
 		return false, fmt.Errorf("couldn't copy from %s to %s: %v", src, dst, syscall.Errno(err))
 	}
 
@@ -103,8 +103,8 @@ func CopyFile(src, dst string, state state, flags COPYFILE_FLAG) (bool, error) {
 	return isCloned != 0, nil
 }
 
-func FcopyFile(src, dst uintptr, state state, flags COPYFILE_FLAG) error {
-	if err := C.fcopyfile(C.int(src), C.int(dst), state, C.copyfile_flags_t(flags)); err != 0 {
+func FcopyFile(src, dst uintptr, state state, flag COPYFILE_FLAG) error {
+	if err := C.fcopyfile(C.int(src), C.int(dst), state, C.copyfile_flags_t(flag)); err != 0 {
 		return fmt.Errorf("couldn't fcopy from %d to %d: %v", src, dst, syscall.Errno(err))
 	}
 
