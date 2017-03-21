@@ -4,10 +4,14 @@ osx_image: xcode8.2
 language: go
 go:
   - 1.8.x
-  - tip
+  - master
+matrix:
+  allow_failures:
+    - master
+  fast_finish: true
 
 install:
-  - true
+  - go get -t -v ./...
 
 before_script:
   - uname -a
