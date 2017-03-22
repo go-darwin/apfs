@@ -12,7 +12,7 @@ import (
 	"log"
 	"os"
 
-	apfs "github.com/zchee/go-apfs"
+	"github.com/go-darwin/apfs"
 )
 
 func main() {

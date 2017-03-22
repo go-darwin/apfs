@@ -1,4 +1,4 @@
-# go-apfs
+# apfs
 
 Package apfs implements an Apple File System(apfs) bindings for Go.
 
@@ -14,14 +14,14 @@ Package apfs implements an Apple File System(apfs) bindings for Go.
 Installing `apfs` package:
 
 ```sh
-go get -u -v github.com/zchee/go-apfs
+go get -u -v github.com/go-darwin/apfs
 ```
 
 
 ## API
 
 ```go
-import "github.com/zchee/go-apfs"
+import "github.com/go-darwin/apfs"
 ```
 
 ## <a name="pkg-index">Index</a>
@@ -44,9 +44,9 @@ import "github.com/zchee/go-apfs"
 * [type RENAME_FALG](#RENAME_FALG)
 
 #### <a name="pkg-files">Package files</a>
-[apfs.go](/src/github.com/zchee/go-apfs/apfs.go) [clone.go](/src/github.com/zchee/go-apfs/clone.go) [copy.go](/src/github.com/zchee/go-apfs/copy.go) [rename.go](/src/github.com/zchee/go-apfs/rename.go) 
+[apfs.go](apfs.go) [clone.go](clone.go) [copy.go](copy.go) [rename.go](rename.go)
 
-## <a name="CloneFile">func</a> [CloneFile](/src/target/clone.go?s=1953:2011#L44)
+## <a name="CloneFile">func</a> [CloneFile](clone.go?s=1953:2011#L44)
 ``` go
 func CloneFile(src, dst string, flag CLONEFILE_FLAG) error
 ```
@@ -77,7 +77,7 @@ clonefile(const char * src, const char * dst, int flags);
 ```
 
 
-## <a name="CloneFileAt">func</a> [CloneFileAt](/src/target/clone.go?s=2925:2985#L64)
+## <a name="CloneFileAt">func</a> [CloneFileAt](clone.go?s=2925:2985#L64)
 ``` go
 func CloneFileAt(src, dst string, flag CLONEFILE_FLAG) error
 ```
@@ -97,7 +97,7 @@ clonefileat(int src_dirfd, const char * src, int dst_dirfd, const char * dst, in
 ```
 
 
-## <a name="CopyFile">func</a> [CopyFile](/src/target/copy.go?s=11965:12051#L204)
+## <a name="CopyFile">func</a> [CopyFile](copy.go?s=11965:12051#L204)
 ``` go
 func CopyFile(src, dst string, state COPYFILE_STATE, flag COPYFILE_FLAG) (bool, error)
 ```
@@ -113,7 +113,7 @@ copyfile(const char *from, const char *to, copyfile_state_t state, copyfile_flag
 ```
 
 
-## <a name="CopyFileStateFree">func</a> [CopyFileStateFree](/src/target/copy.go?s=13720:13770#L247)
+## <a name="CopyFileStateFree">func</a> [CopyFileStateFree](copy.go?s=13720:13770#L247)
 ``` go
 func CopyFileStateFree(state COPYFILE_STATE) error
 ```
@@ -126,7 +126,7 @@ copyfile_state_free(copyfile_state_t state);
 
 
 
-## <a name="CopyFileStateGet">func</a> [CopyFileStateGet](/src/target/copy.go?s=14172:14260#L261)
+## <a name="CopyFileStateGet">func</a> [CopyFileStateGet](copy.go?s=14172:14260#L261)
 ``` go
 func CopyFileStateGet(state COPYFILE_STATE, flag COPYFILE_STATE_FLAG, result *int) error
 ```
@@ -141,7 +141,7 @@ copyfile_state_get(copyfile_state_t state, uint32_t flag, void * dst);
 
 
 
-## <a name="CopyFileStateSet">func</a> [CopyFileStateSet](/src/target/copy.go?s=14689:14777#L275)
+## <a name="CopyFileStateSet">func</a> [CopyFileStateSet](copy.go?s=14689:14777#L275)
 ``` go
 func CopyFileStateSet(state COPYFILE_STATE, flag COPYFILE_STATE_FLAG, result *int) error
 ```
@@ -155,7 +155,7 @@ copyfile_state_set(copyfile_state_t state, uint32_t flag, const void * src);
 ```
 
 
-## <a name="FcloneFileAt">func</a> [FcloneFileAt](/src/target/clone.go?s=3669:3740#L87)
+## <a name="FcloneFileAt">func</a> [FcloneFileAt](clone.go?s=3669:3740#L87)
 ``` go
 func FcloneFileAt(srcFd uintptr, dst string, flag CLONEFILE_FLAG) error
 ```
@@ -171,7 +171,7 @@ fclonefileat(int srcfd, int dst_dirfd, const char * dst, int flags);
 ```
 
 
-## <a name="FcopyFile">func</a> [FcopyFile](/src/target/copy.go?s=12901:12981#L225)
+## <a name="FcopyFile">func</a> [FcopyFile](copy.go?s=12901:12981#L225)
 ``` go
 func FcopyFile(src, dst uintptr, state COPYFILE_STATE, flag COPYFILE_FLAG) error
 ```
@@ -187,7 +187,7 @@ fcopyfile(int from, int to, copyfile_state_t state, copyfile_flags_t flags);
 ```
 
 
-## <a name="RenameatxNp">func</a> [RenameatxNp](/src/target/rename.go?s=1696:1753#L40)
+## <a name="RenameatxNp">func</a> [RenameatxNp](rename.go?s=1696:1753#L40)
 ``` go
 func RenameatxNp(src, dst string, flag RENAME_FALG) error
 ```
@@ -199,7 +199,7 @@ renameatx_np(int fromfd, const char *from, int tofd, const char *to, unsigned in
 ```
 
 
-## <a name="RenamexNp">func</a> [RenamexNp](/src/target/rename.go?s=1244:1299#L29)
+## <a name="RenamexNp">func</a> [RenamexNp](rename.go?s=1244:1299#L29)
 ``` go
 func RenamexNp(src, dst string, flag RENAME_FALG) error
 ```
@@ -212,7 +212,7 @@ renamex_np(const char *from, const char *to, unsigned int flags);
 
 
 
-## <a name="CLONEFILE_FLAG">type</a> [CLONEFILE_FLAG](/src/target/clone.go?s=442:468#L14)
+## <a name="CLONEFILE_FLAG">type</a> [CLONEFILE_FLAG](clone.go?s=442:468#L14)
 ``` go
 type CLONEFILE_FLAG uint32
 ```
@@ -229,7 +229,7 @@ var (
 ```
 
 
-## <a name="COPYFILE_FLAG">type</a> [COPYFILE_FLAG](/src/target/copy.go?s=341:363#L11)
+## <a name="COPYFILE_FLAG">type</a> [COPYFILE_FLAG](copy.go?s=341:363#L11)
 ``` go
 type COPYFILE_FLAG int
 ```
@@ -309,7 +309,7 @@ var (
 ```
 
 
-## <a name="COPYFILE_RECURSE_CALLBACK">type</a> [COPYFILE_RECURSE_CALLBACK](/src/target/copy.go?s=8510:8547#L147)
+## <a name="COPYFILE_RECURSE_CALLBACK">type</a> [COPYFILE_RECURSE_CALLBACK](copy.go?s=8510:8547#L147)
 ``` go
 type COPYFILE_RECURSE_CALLBACK uint32
 ```
@@ -367,14 +367,14 @@ var (
 ```
 
 
-## <a name="COPYFILE_STATE">type</a> [COPYFILE_STATE](/src/target/copy.go?s=11499:11537#L194)
+## <a name="COPYFILE_STATE">type</a> [COPYFILE_STATE](copy.go?s=11499:11537#L194)
 ``` go
 type COPYFILE_STATE C.copyfile_state_t
 ```
 COPYFILE_STATE provides the copyfile state.
 
 
-### <a name="CopyFileStateAlloc">func</a> [CopyFileStateAlloc](/src/target/copy.go?s=13484:13524#L239)
+### <a name="CopyFileStateAlloc">func</a> [CopyFileStateAlloc](copy.go?s=13484:13524#L239)
 ``` go
 func CopyFileStateAlloc() COPYFILE_STATE
 ```
@@ -388,7 +388,7 @@ copyfile_state_alloc(void);
 ```
 
 
-## <a name="COPYFILE_STATE_FLAG">type</a> [COPYFILE_STATE_FLAG](/src/target/copy.go?s=4736:4767#L86)
+## <a name="COPYFILE_STATE_FLAG">type</a> [COPYFILE_STATE_FLAG](copy.go?s=4736:4767#L86)
 ``` go
 type COPYFILE_STATE_FLAG uint32
 ```
@@ -456,7 +456,7 @@ var (
 ```
 
 
-## <a name="RENAME_FALG">type</a> [RENAME_FALG](/src/target/rename.go?s=356:377#L11)
+## <a name="RENAME_FALG">type</a> [RENAME_FALG](rename.go?s=356:377#L11)
 ``` go
 type RENAME_FALG uint
 ```
@@ -487,17 +487,17 @@ Not yet.
 
 ## License
 
-go-apfs is released under the [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause).  
+apfs is released under the [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause).  
 
 
-[travis]: https://travis-ci.org/zchee/go-apfs
-[godoc]: https://godoc.org/github.com/zchee/go-apfs
-[codecov]: https://codecov.io/gh/zchee/go-apfs
-[release]: https://github.com/zchee/go-apfs/releases
-[ga]: https://github.com/zchee/go-apfs
+[travis]: https://travis-ci.org/go-darwin/apfs
+[godoc]: https://godoc.org/github.com/go-darwin/apfs
+[codecov]: https://codecov.io/gh/go-darwin/apfs
+[release]: https://github.com/go-darwin/apfs/releases
+[ga]: https://github.com/go-darwin/apfs
 
-[travis-badge]: https://img.shields.io/travis/zchee/go-apfs.svg?style=flat-square&label=%20Travis%20CI&logo=data%3Aimage%2Fsvg%2Bxml%3Bcharset%3Dutf-8%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iNSA0IDI0IDI0Ij48cGF0aCBmaWxsPSIjREREIiBkPSJNMTEuMzkyKzkuMzc0aDQuMDk2djEzLjEyaC0xLjUzNnYyLjI0aDYuMDgwdi0yLjQ5NmgtMS45MnYtMTMuMDU2aDQuMzUydjEuOTJoMS45ODR2LTMuOTA0aC0xNS4yOTZ2My45MDRoMi4yNHpNMjkuMjYzKzIuNzE4aC0yNC44NDhjLTAuNDMzKzAtMC44MzIrMC4zMjEtMC44MzIrMC43NDl2MjQuODQ1YzArMC40MjgrMC4zOTgrMC43NzQrMC44MzIrMC43NzRoMjQuODQ4YzAuNDMzKzArMC43NTMtMC4zNDcrMC43NTMtMC43NzR2LTI0Ljg0NWMwLTAuNDI4LTAuMzE5LTAuNzQ5LTAuNzUzLTAuNzQ5ek0yNS43MjgrMTIuMzgyaC00LjU0NHYtMS45MmgtMS43OTJ2MTAuNDk2aDEuOTJ2NS4wNTZoLTguNjR2LTQuOGgxLjUzNnYtMTAuNTZoLTEuNTM2djEuNzI4aC00Ljh2LTYuNDY0aDE3Ljg1NnY2LjQ2NHoiLz48L3N2Zz4=
+[travis-badge]: https://img.shields.io/travis/go-darwin/apfs.svg?style=flat-square&label=%20Travis%20CI&logo=data%3Aimage%2Fsvg%2Bxml%3Bcharset%3Dutf-8%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iNSA0IDI0IDI0Ij48cGF0aCBmaWxsPSIjREREIiBkPSJNMTEuMzkyKzkuMzc0aDQuMDk2djEzLjEyaC0xLjUzNnYyLjI0aDYuMDgwdi0yLjQ5NmgtMS45MnYtMTMuMDU2aDQuMzUydjEuOTJoMS45ODR2LTMuOTA0aC0xNS4yOTZ2My45MDRoMi4yNHpNMjkuMjYzKzIuNzE4aC0yNC44NDhjLTAuNDMzKzAtMC44MzIrMC4zMjEtMC44MzIrMC43NDl2MjQuODQ1YzArMC40MjgrMC4zOTgrMC43NzQrMC44MzIrMC43NzRoMjQuODQ4YzAuNDMzKzArMC43NTMtMC4zNDcrMC43NTMtMC43NzR2LTI0Ljg0NWMwLTAuNDI4LTAuMzE5LTAuNzQ5LTAuNzUzLTAuNzQ5ek0yNS43MjgrMTIuMzgyaC00LjU0NHYtMS45MmgtMS43OTJ2MTAuNDk2aDEuOTJ2NS4wNTZoLTguNjR2LTQuOGgxLjUzNnYtMTAuNTZoLTEuNTM2djEuNzI4aC00Ljh2LTYuNDY0aDE3Ljg1NnY2LjQ2NHoiLz48L3N2Zz4=
 [godoc-badge]: https://img.shields.io/badge/godoc-reference-4F73B3.svg?style=flat-square&label=%20godoc.org
-[codecov-badge]: https://img.shields.io/codecov/c/github/zchee/go-apfs.svg?style=flat-square&label=%20%20Codecov%2Eio&logo=data%3Aimage%2Fsvg%2Bxml%3Bcharset%3Dutf-8%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDI1NiAyODEiPjxwYXRoIGZpbGw9IiNFRUUiIGQ9Ik0yMTguNTUxIDM3LjQxOUMxOTQuNDE2IDEzLjI4OSAxNjIuMzMgMCAxMjguMDk3IDAgNTcuNTM3LjA0Ny4wOTEgNTcuNTI3LjA0IDEyOC4xMjFMMCAxNDkuODEzbDE2Ljg1OS0xMS40OWMxMS40NjgtNy44MTQgMjQuNzUtMTEuOTQ0IDM4LjQxNy0xMS45NDQgNC4wNzkgMCA4LjE5OC4zNzMgMTIuMjQgMS4xMSAxMi43NDIgMi4zMiAyNC4xNjUgOC4wODkgMzMuNDE0IDE2Ljc1OCAyLjEyLTQuNjcgNC42MTQtOS4yMDkgNy41Ni0xMy41MzZhODguMDgxIDg4LjA4MSAwIDAgMSAzLjgwNS01LjE1Yy0xMS42NTItOS44NC0yNS42NDktMTYuNDYzLTQwLjkyNi0xOS4yNDVhOTAuMzUgOTAuMzUgMCAwIDAtMTYuMTItMS40NTkgODguMzc3IDg4LjM3NyAwIDAgMC0zMi4yOSA2LjA3YzguMzYtNTEuMjIyIDUyLjg1LTg5LjM3IDEwNS4yMy04OS40MDggMjguMzkyIDAgNTUuMDc4IDExLjA1MyA3NS4xNDkgMzEuMTE3IDE2LjAxMSAxNi4wMSAyNi4yNTQgMzYuMDMzIDI5Ljc4OCA1OC4xMTctMTAuMzI5LTQuMDM1LTIxLjIxMi02LjEtMzIuNDAzLTYuMTQ0bC0xLjU2OC0uMDA3YTkwLjk1NyA5MC45NTcgMCAwIDAtMy40MDEuMTExYy0xLjk1NS4xLTMuODk4LjI3Ny01LjgyMS41LS41NzQuMDYzLTEuMTM5LjE1My0xLjcwNy4yMzEtMS4zNzguMTg2LTIuNzUuMzk1LTQuMTA5LjYzOS0uNjAzLjExLTEuMjAzLjIzMS0xLjguMzUxYTkwLjUxNyA5MC41MTcgMCAwIDAtNC4xMTQuOTM3Yy0uNDkyLjEyNi0uOTgzLjI0My0xLjQ3LjM3NGE5MC4xODMgOTAuMTgzIDAgMCAwLTUuMDkgMS41MzhjLS4xLjAzNS0uMjA0LjA2My0uMzA0LjA5NmE4Ny41MzIgODcuNTMyIDAgMCAwLTExLjA1NyA0LjY0OWMtLjA5Ny4wNS0uMTkzLjEwMS0uMjkzLjE1MWE4Ni43IDg2LjcgMCAwIDAtNC45MTIgMi43MDFsLS4zOTguMjM4YTg2LjA5IDg2LjA5IDAgMCAwLTIyLjMwMiAxOS4yNTNjLS4yNjIuMzE4LS41MjQuNjM1LS43ODQuOTU4LTEuMzc2IDEuNzI1LTIuNzE4IDMuNDktMy45NzYgNS4zMzZhOTEuNDEyIDkxLjQxMiAwIDAgMC0zLjY3MiA1LjkxMyA5MC4yMzUgOTAuMjM1IDAgMCAwLTIuNDk2IDQuNjM4Yy0uMDQ0LjA5LS4wODkuMTc1LS4xMzMuMjY1YTg4Ljc4NiA4OC43ODYgMCAwIDAtNC42MzcgMTEuMjcybC0uMDAyLjAwOXYuMDA0YTg4LjAwNiA4OC4wMDYgMCAwIDAtNC41MDkgMjkuMzEzYy4wMDUuMzk3LjAwNS43OTQuMDE5IDEuMTkyLjAyMS43NzcuMDYgMS41NTcuMTA0IDIuMzM4YTk4LjY2IDk4LjY2IDAgMCAwIC4yODkgMy44MzRjLjA3OC44MDQuMTc0IDEuNjA2LjI3NSAyLjQxLjA2My41MTIuMTE5IDEuMDI2LjE5NSAxLjUzNGE5MC4xMSA5MC4xMSAwIDAgMCAuNjU4IDQuMDFjNC4zMzkgMjIuOTM4IDE3LjI2MSA0Mi45MzcgMzYuMzkgNTYuMzE2bDIuNDQ2IDEuNTY0LjAyLS4wNDhhODguNTcyIDg4LjU3MiAwIDAgMCAzNi4yMzIgMTMuNDVsMS43NDYuMjM2IDEyLjk3NC0yMC44MjItNC42NjQtLjEyN2MtMzUuODk4LS45ODUtNjUuMS0zMS4wMDMtNjUuMS02Ni45MTcgMC0zNS4zNDggMjcuNjI0LTY0LjcwMiA2Mi44NzYtNjYuODI5bDIuMjMtLjA4NWMxNC4yOTItLjM2MiAyOC4zNzIgMy44NTkgNDAuMzI1IDExLjk5N2wxNi43ODEgMTEuNDIxLjAzNi0yMS41OGMuMDI3LTM0LjIxOS0xMy4yNzItNjYuMzc5LTM3LjQ0OS05MC41NTQiLz48L3N2Zz4=
-[release-badge]: https://img.shields.io/github/release/zchee/go-apfs.svg?style=flat-square
+[codecov-badge]: https://img.shields.io/codecov/c/github/go-darwin/apfs.svg?style=flat-square&label=%20%20Codecov%2Eio&logo=data%3Aimage%2Fsvg%2Bxml%3Bcharset%3Dutf-8%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDI1NiAyODEiPjxwYXRoIGZpbGw9IiNFRUUiIGQ9Ik0yMTguNTUxIDM3LjQxOUMxOTQuNDE2IDEzLjI4OSAxNjIuMzMgMCAxMjguMDk3IDAgNTcuNTM3LjA0Ny4wOTEgNTcuNTI3LjA0IDEyOC4xMjFMMCAxNDkuODEzbDE2Ljg1OS0xMS40OWMxMS40NjgtNy44MTQgMjQuNzUtMTEuOTQ0IDM4LjQxNy0xMS45NDQgNC4wNzkgMCA4LjE5OC4zNzMgMTIuMjQgMS4xMSAxMi43NDIgMi4zMiAyNC4xNjUgOC4wODkgMzMuNDE0IDE2Ljc1OCAyLjEyLTQuNjcgNC42MTQtOS4yMDkgNy41Ni0xMy41MzZhODguMDgxIDg4LjA4MSAwIDAgMSAzLjgwNS01LjE1Yy0xMS42NTItOS44NC0yNS42NDktMTYuNDYzLTQwLjkyNi0xOS4yNDVhOTAuMzUgOTAuMzUgMCAwIDAtMTYuMTItMS40NTkgODguMzc3IDg4LjM3NyAwIDAgMC0zMi4yOSA2LjA3YzguMzYtNTEuMjIyIDUyLjg1LTg5LjM3IDEwNS4yMy04OS40MDggMjguMzkyIDAgNTUuMDc4IDExLjA1MyA3NS4xNDkgMzEuMTE3IDE2LjAxMSAxNi4wMSAyNi4yNTQgMzYuMDMzIDI5Ljc4OCA1OC4xMTctMTAuMzI5LTQuMDM1LTIxLjIxMi02LjEtMzIuNDAzLTYuMTQ0bC0xLjU2OC0uMDA3YTkwLjk1NyA5MC45NTcgMCAwIDAtMy40MDEuMTExYy0xLjk1NS4xLTMuODk4LjI3Ny01LjgyMS41LS41NzQuMDYzLTEuMTM5LjE1My0xLjcwNy4yMzEtMS4zNzguMTg2LTIuNzUuMzk1LTQuMTA5LjYzOS0uNjAzLjExLTEuMjAzLjIzMS0xLjguMzUxYTkwLjUxNyA5MC41MTcgMCAwIDAtNC4xMTQuOTM3Yy0uNDkyLjEyNi0uOTgzLjI0My0xLjQ3LjM3NGE5MC4xODMgOTAuMTgzIDAgMCAwLTUuMDkgMS41MzhjLS4xLjAzNS0uMjA0LjA2My0uMzA0LjA5NmE4Ny41MzIgODcuNTMyIDAgMCAwLTExLjA1NyA0LjY0OWMtLjA5Ny4wNS0uMTkzLjEwMS0uMjkzLjE1MWE4Ni43IDg2LjcgMCAwIDAtNC45MTIgMi43MDFsLS4zOTguMjM4YTg2LjA5IDg2LjA5IDAgMCAwLTIyLjMwMiAxOS4yNTNjLS4yNjIuMzE4LS41MjQuNjM1LS43ODQuOTU4LTEuMzc2IDEuNzI1LTIuNzE4IDMuNDktMy45NzYgNS4zMzZhOTEuNDEyIDkxLjQxMiAwIDAgMC0zLjY3MiA1LjkxMyA5MC4yMzUgOTAuMjM1IDAgMCAwLTIuNDk2IDQuNjM4Yy0uMDQ0LjA5LS4wODkuMTc1LS4xMzMuMjY1YTg4Ljc4NiA4OC43ODYgMCAwIDAtNC42MzcgMTEuMjcybC0uMDAyLjAwOXYuMDA0YTg4LjAwNiA4OC4wMDYgMCAwIDAtNC41MDkgMjkuMzEzYy4wMDUuMzk3LjAwNS43OTQuMDE5IDEuMTkyLjAyMS43NzcuMDYgMS41NTcuMTA0IDIuMzM4YTk4LjY2IDk4LjY2IDAgMCAwIC4yODkgMy44MzRjLjA3OC44MDQuMTc0IDEuNjA2LjI3NSAyLjQxLjA2My41MTIuMTE5IDEuMDI2LjE5NSAxLjUzNGE5MC4xMSA5MC4xMSAwIDAgMCAuNjU4IDQuMDFjNC4zMzkgMjIuOTM4IDE3LjI2MSA0Mi45MzcgMzYuMzkgNTYuMzE2bDIuNDQ2IDEuNTY0LjAyLS4wNDhhODguNTcyIDg4LjU3MiAwIDAgMCAzNi4yMzIgMTMuNDVsMS43NDYuMjM2IDEyLjk3NC0yMC44MjItNC42NjQtLjEyN2MtMzUuODk4LS45ODUtNjUuMS0zMS4wMDMtNjUuMS02Ni45MTcgMC0zNS4zNDggMjcuNjI0LTY0LjcwMiA2Mi44NzYtNjYuODI5bDIuMjMtLjA4NWMxNC4yOTItLjM2MiAyOC4zNzIgMy44NTkgNDAuMzI1IDExLjk5N2wxNi43ODEgMTEuNDIxLjAzNi0yMS41OGMuMDI3LTM0LjIxOS0xMy4yNzItNjYuMzc5LTM3LjQ0OS05MC41NTQiLz48L3N2Zz4=
+[release-badge]: https://img.shields.io/github/release/go-darwin/apfs.svg?style=flat-square
 [ga-badge]: https://ga-beacon.appspot.com/UA-89201129-1/gist-go-template?flat&useReferer&pixel
