@@ -14,7 +14,6 @@ package apfs
 */
 import "C"
 import (
-	"errors"
 	"fmt"
 	"path/filepath"
 	"syscall"
@@ -53,7 +52,7 @@ var (
 //  clonefile(const char * src, const char * dst, int flags);
 func CloneFile(src, dst string, flag CLONEFILE_FLAG) error {
 	if err := C.clonefile(C.CString(src), C.CString(dst), C.uint32_t(flag)); err != 0 {
-		return errors.New(fmt.Sprintf("error: C.clonefile: %v", syscall.Errno(err)))
+		return fmt.Errorf("error: C.clonefile: %v", syscall.Errno(err))
 	}
 
 	return nil
@@ -81,7 +80,7 @@ func CloneFileAt(src, dst string, flag CLONEFILE_FLAG) error {
 		dstDirFd = C.AT_FDCWD
 	}
 	if err := C.clonefileat(srcDirFd, C.CString(src), dstDirFd, C.CString(dst), C.uint32_t(flag)); err != 0 {
-		return errors.New(fmt.Sprintf("error: C.clonefileat: %v", syscall.Errno(err)))
+		return fmt.Errorf("error: C.clonefileat: %v", syscall.Errno(err))
 	}
 
 	return nil
@@ -100,7 +99,7 @@ func FcloneFileAt(srcFd uintptr, dst string, flag CLONEFILE_FLAG) error {
 		dstDirFd = C.AT_FDCWD
 	}
 	if err := C.fclonefileat(C.int(srcFd), dstDirFd, C.CString(dst), C.uint32_t(flag)); err != 0 {
-		return errors.New(fmt.Sprintf("error: C.fclonefileat: %v", syscall.Errno(err)))
+		return fmt.Errorf("error: C.fclonefileat: %v", syscall.Errno(err))
 	}
 
 	return nil
