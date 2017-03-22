@@ -44,7 +44,7 @@ func RenamexNp(src, dst string, flag RENAME_FALG) error {
 	return nil
 }
 
-// RenamexNp system calls are similar to rename() and renameat() counterparts except that they take a flags argument.
+// RenameatxNp system calls are similar to rename() and renameat() counterparts except that they take a flags argument.
 //  int
 //  renameatx_np(int fromfd, const char *from, int tofd, const char *to, unsigned int flags);
 func RenameatxNp(src, dst string, flag RENAME_FALG) error {
