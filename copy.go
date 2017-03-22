@@ -31,14 +31,14 @@ var (
 	COPYFILE_DATA COPYFILE_FLAG = 1 << 3
 
 	// COPYFILE_SECURITY copy the source file's POSIX and ACL information; equivalent to (COPYFILE_STAT|COPYFILE_ACL).
-	COPYFILE_SECURITY COPYFILE_FLAG = COPYFILE_STAT | COPYFILE_ACL
+	COPYFILE_SECURITY = COPYFILE_STAT | COPYFILE_ACL
 	// COPYFILE_METADATA copy the metadata; equivalent to (COPYFILE_SECURITY|COPYFILE_XATTR).
-	COPYFILE_METADATA COPYFILE_FLAG = COPYFILE_SECURITY | COPYFILE_XATTR
+	COPYFILE_METADATA = COPYFILE_SECURITY | COPYFILE_XATTR
 	// COPYFILE_ALL copy the entire file; equivalent to (COPYFILE_METADATA|COPYFILE_DATA).
-	COPYFILE_ALL COPYFILE_FLAG = COPYFILE_METADATA | COPYFILE_DATA
+	COPYFILE_ALL = COPYFILE_METADATA | COPYFILE_DATA
 
 	// COPYFILE_RECURSIVE causes CopyFile to recursively copy a hierarchy.
-
+	//
 	// This flag is not used by FcopyFile; see below for more information.
 	COPYFILE_RECURSIVE COPYFILE_FLAG = 1 << 15 // Descend into hierarchies
 	// COPYFILE_CHECK return a bitmask (corresponding to the flags argument) indicating which contents would be copied
@@ -60,7 +60,7 @@ var (
 	// COPYFILE_UNLINK unlink the to file before starting.  (This is only applicable for the copyfile() function.)
 	COPYFILE_UNLINK COPYFILE_FLAG = 1 << 21 // unlink dst before copy
 	// COPYFILE_NOFOLLOW this is a convenience macro, equivalent to (COPYFILE_NOFOLLOW_DST|COPYFILE_NOFOLLOW_SRC).
-	COPYFILE_NOFOLLOW COPYFILE_FLAG = COPYFILE_NOFOLLOW_SRC | COPYFILE_NOFOLLOW_DST
+	COPYFILE_NOFOLLOW = COPYFILE_NOFOLLOW_SRC | COPYFILE_NOFOLLOW_DST
 
 	// COPYFILE_PACK serialize the from file. The to file is an AppleDouble-format file.
 	COPYFILE_PACK COPYFILE_FLAG = 1 << 22
