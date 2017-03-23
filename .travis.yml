@@ -4,10 +4,10 @@ osx_image: xcode8.2
 language: go
 go:
   - 1.8.x
-  - master
+  - tip
 matrix:
   allow_failures:
-    - master
+    - tip
   fast_finish: true
 
 install:
