@@ -1,0 +1,63 @@
+version: 2.1
+
+orbs:
+  golang: cci-orb/golang@0.0.9
+  codecov: codecov/codecov@volatile
+
+darwin: &darwin
+  executor: golang/macos
+  working_directory: ~/go/src/github.com/go-darwin/apfs
+
+jobs:
+  test:
+    <<: *darwin
+    steps:
+      - run:
+          name: Show versions
+          command: |
+            uname -a
+            sw_vers
+            xcodebuild -version
+            system_profiler SPHardwareDataType
+      - checkout
+      - golang/homebrew
+      - golang/gomod:
+          file: "go.mod"
+          paths: "~/go/pkg/mod"
+      - run:
+          name: Test and collect coverages
+          environment:
+            GO111MODULE: "on"
+          command: |
+            make coverage/ci
+      - codecov/upload:
+          file: "/tmp/ci/artifacts/coverage.out"
+          flags: darwin
+      - store_artifacts:
+          path: /tmp/ci/artifacts
+      - store_artifacts:
+          path: /tmp/ci/artifacts
+      - store_test_results:
+          path: /tmp/ci/test-results
+
+  lint:
+    <<: *darwin
+    steps:
+      - checkout
+      - golang/homebrew
+      - golang/gomod:
+          file: "go.mod"
+          paths: "~/go/pkg/mod"
+      - run:
+          name: Run lint for sources
+          command: |
+            make lint
+
+workflows:
+  version: 2
+  workflows:
+    jobs:
+      - test:
+          context: org-global
+      - lint:
+          context: org-global
