@@ -10,7 +10,7 @@ Package apfs implements an Apple File System(apfs) bindings for Go.
 Installing `apfs` package:
 
 ```sh
-go get -u -v github.com/go-darwin/apfs
+go get -u -v go-darwin.dev/apfs
 ```
 
 
