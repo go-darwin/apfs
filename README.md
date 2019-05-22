@@ -24,7 +24,7 @@ The apfs is released under the [BSD 3-Clause License][license-bsd-3-clause].
 
 <!-- badge links -->
 [circleci]: https://circleci.com/gh/go-darwin/workflows/apfs
-[godoc]: https://godoc.org/github.com/go-darwin/apfs
+[godoc]: https://godoc.org/go-darwin.dev/apfs
 [codecov]: https://codecov.io/gh/go-darwin/apfs
 [release]: https://github.com/go-darwin/apfs/releases
 [ga]: https://github.com/go-darwin/apfs
