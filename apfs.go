@@ -5,4 +5,4 @@
 // +build darwin
 
 // Package apfs implements an Apple File System(apfs) bindings for Go.
-package apfs
+package apfs // import "go-darwin.dev/apfs"
