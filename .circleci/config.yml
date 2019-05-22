@@ -1,12 +1,12 @@
 version: 2.1
 
 orbs:
-  golang: cci-orb/golang@0.0.9
+  golang: cci-orb/golang@volatile
   codecov: codecov/codecov@volatile
 
 darwin: &darwin
   executor: golang/macos
-  working_directory: ~/go/src/github.com/go-darwin/apfs
+  working_directory: ~/go/src/go-darwin.dev/apfs
 
 jobs:
   test:
