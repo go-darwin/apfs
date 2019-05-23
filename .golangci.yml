@@ -3,11 +3,13 @@ run:
   deadline: 5m
   issues-exit-code: 1
   tests: true
+  build-tags:
+    - darwin
   # skip-dirs:
   skip-files:
     - ".*\\.pb\\.go"
     - ".*(.|_)gen\\.go"
-  modules-download-mode: vendor
+  modules-download-mode: readonly
 
 linters-settings:
   errcheck:
@@ -23,8 +25,6 @@ linters-settings:
     local-prefixes: go-darwin.dev/apfs
   golint:
     min-confidence: 0.3
-  govet:
-    check-shadowing: false
   gocritic:
     enabled-tags:
       - diagnostic
@@ -50,7 +50,7 @@ linters-settings:
     algo: cha
     check-exported: true
   unused:
-    check-exported: true
+    check-exported: false
 
 linters:
   enable:
@@ -59,13 +59,21 @@ linters:
     - gochecknoglobals
     - gochecknoinits
     - gocyclo
+    - golint
     - gosec
+    - govet
     - lll
     - nakedret
+    - scopelint
   fast: true
 
 issues:
-  exclude-use-default: false
+  exclude-rules:
+    - path: "_test.go"
+      linters:
+        - dupl
+        - errcheck
+        - gocritic
 
 output:
   format: colored-line-number
