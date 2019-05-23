@@ -31,11 +31,8 @@ linters-settings:
       - style
       - performance
       - experimental
-    settings:
-      captLocal:
-        paramsOnly: true
-      rangeValCopy:
-        sizeThreshold: 32
+    disabled-checks:
+      - dupImport
   maligned:
     suggest-new: true
   misspell:
