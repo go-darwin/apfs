@@ -5,7 +5,8 @@ run:
   tests: true
   build-tags:
     - darwin
-  # skip-dirs:
+  skip-dirs:
+    - "cmd"
   skip-files:
     - ".*\\.pb\\.go"
     - ".*(.|_)gen\\.go"
