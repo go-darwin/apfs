@@ -6,7 +6,7 @@ orbs:
 
 darwin: &darwin
   executor: golang/macos
-  working_directory: ~/go/src/go-darwin.dev/apfs
+  working_directory: ~/go/src/github.com/go-darwin/apfs
 
 jobs:
   test:

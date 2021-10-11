@@ -1,1 +1,3 @@
-module go-darwin.dev/apfs
+module github.com/go-darwin/apfs
+
+go 1.13

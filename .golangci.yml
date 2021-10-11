@@ -23,7 +23,7 @@ linters-settings:
   gofmt:
     simplify: true
   goimports:
-    local-prefixes: go-darwin.dev/apfs
+    local-prefixes: github.com/go-darwin/apfs
   golint:
     min-confidence: 0.3
   gocritic:
@@ -32,6 +32,7 @@ linters-settings:
       - style
       - performance
       - experimental
+      - opinionated
     disabled-checks:
       - dupImport
   maligned:
